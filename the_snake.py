@@ -176,7 +176,11 @@ def handle_keys(snake):
 
 
 def main():
-    """Главная функция игры. Инициализирует объекты и запускает игровой цикл."""
+    """
+    Главная функция игры.
+
+    Инициализирует объекты и запускает игровой цикл.
+    """
     global screen, clock
     pygame.init()
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
