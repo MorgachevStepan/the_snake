@@ -18,9 +18,9 @@ SNAKE_COLOR = (0, 255, 0)
 
 SPEED = 10
 
-screen = None
-clock = None
-
+screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT), 0, 32)
+pygame.display.set_caption('Змейка')
+clock = pygame.time.Clock()
 
 class GameObject:
     """Базовый класс для игровых объектов."""
@@ -35,11 +35,11 @@ class GameObject:
         self.position = position
         self.body_color = body_color
 
-    def draw(self, screen):
+    def draw(self, display):
         """
         Отрисовывает объект на экране.
 
-        :param screen: поверхность для отрисовки
+        :param display: поверхность для отрисовки
         """
         pass
 
@@ -65,15 +65,15 @@ class Apple(GameObject):
         self.body_color = body_color
         self.randomize_position()
 
-    def draw(self, screen):
+    def draw(self, display):
         """
         Отрисовывает яблоко на экране.
 
-        :param screen: поверхность для отрисовки
+        :param display: поверхность для отрисовки
         """
         rect = pygame.Rect(self.position, (GRID_SIZE, GRID_SIZE))
-        pygame.draw.rect(screen, self.body_color, rect)
-        pygame.draw.rect(screen, BORDER_COLOR, rect, 1)
+        pygame.draw.rect(display, self.body_color, rect)
+        pygame.draw.rect(display, BORDER_COLOR, rect, 1)
 
 
 class Snake(GameObject):
@@ -126,20 +126,20 @@ class Snake(GameObject):
         """Увеличивает длину змейки на один сегмент."""
         self.length += 1
 
-    def draw(self, screen):
+    def draw(self, display):
         """
         Отрисовывает змейку на экране.
 
-        :param screen: поверхность для отрисовки
+        :param display: поверхность для отрисовки
         """
         for position in self.positions[1:]:
             rect = pygame.Rect(position, (GRID_SIZE, GRID_SIZE))
-            pygame.draw.rect(screen, self.body_color, rect)
-            pygame.draw.rect(screen, BORDER_COLOR, rect, 1)
+            pygame.draw.rect(display, self.body_color, rect)
+            pygame.draw.rect(display, BORDER_COLOR, rect, 1)
 
         head_rect = pygame.Rect(self.positions[0], (GRID_SIZE, GRID_SIZE))
-        pygame.draw.rect(screen, self.body_color, head_rect)
-        pygame.draw.rect(screen, BORDER_COLOR, head_rect, 1)
+        pygame.draw.rect(display, self.body_color, head_rect)
+        pygame.draw.rect(display, BORDER_COLOR, head_rect, 1)
 
     def get_head_position(self):
         """Возвращает позицию головы змейки."""
@@ -181,10 +181,7 @@ def main():
 
     Инициализирует объекты и запускает игровой цикл.
     """
-    global screen, clock
     pygame.init()
-    screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
-    clock = pygame.time.Clock()
 
     snake = Snake()
     apple = Apple()
