@@ -44,9 +44,7 @@ class GameObject:
         pass
 
     def randomize_position(self):
-        """
-        Устанавливает случайную позицию объекта на игровом поле.
-        """
+        """Устанавливает случайную позицию объекта на игровом поле."""
         self.position = (
             randint(0, GRID_WIDTH - 1) * GRID_SIZE,
             randint(0, GRID_HEIGHT - 1) * GRID_SIZE
@@ -96,17 +94,13 @@ class Snake(GameObject):
         self.body_color = body_color
 
     def update_direction(self):
-        """
-        Обновляет направление движения змейки.
-        """
+        """Обновляет направление движения змейки."""
         if self.next_direction:
             self.direction = self.next_direction
             self.next_direction = None
 
     def move(self):
-        """
-        Двигает змейку на одну клетку в направлении движения.
-        """
+        """Двигает змейку на одну клетку в направлении движения."""
         head_x, head_y = self.positions[0]
         new_head = (
             head_x + self.direction[0] * GRID_SIZE,
@@ -129,9 +123,7 @@ class Snake(GameObject):
             self.positions.pop()
 
     def grow(self):
-        """
-        Увеличивает длину змейки на один сегмент.
-        """
+        """Увеличивает длину змейки на один сегмент."""
         self.length += 1
 
     def draw(self, screen):
@@ -150,15 +142,11 @@ class Snake(GameObject):
         pygame.draw.rect(screen, BORDER_COLOR, head_rect, 1)
 
     def get_head_position(self):
-        """
-        Возвращает позицию головы змейки.
-        """
+        """Возвращает позицию головы змейки."""
         return self.positions[0]
 
     def reset(self):
-        """
-        Сбрасывает состояние змейки в исходное.
-        """
+        """Сбрасывает состояние змейки в исходное."""
         self.randomize_position()
         self.length = 1
         self.positions = [self.position]
@@ -188,9 +176,7 @@ def handle_keys(snake):
 
 
 def main():
-    """
-    Главная функция игры. Инициализирует объекты и запускает игровой цикл.
-    """
+    """Главная функция игры. Инициализирует объекты и запускает игровой цикл."""
     global screen, clock
     pygame.init()
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
